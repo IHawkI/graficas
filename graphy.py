@@ -60,8 +60,8 @@ if vista_general or not vista_filtrada:
     # Cuadros de métricas personalizados en una sola fila
     total_clientes = len(df)
     edad_promedio = f"{df['Age'].mean():.1f}"
-    rating_promedio = f"${df['Rating'].mean():,.2f}"
-    promedio_accesorios_promedio = f"{(1 - df['Add-on Total'].mean()) * 100:.2f}%"
+    Cantidad_promedio = f"{df['Quantity'].mean():,.2f}"
+    promedio_accesorios_promedio = f"{(1 - df['Add-on Total'].mean()).2f}%"
 
     st.markdown(f"""
         <div class="metric-container">
@@ -74,8 +74,8 @@ if vista_general or not vista_filtrada:
                 <div class="metric-value">{edad_promedio}</div>
             </div>
             <div class="metric-box">
-                <div class="metric-title">Rating Promedio</div>
-                <div class="metric-value">{rating_promedio}</div>
+                <div class="metric-title">Cantidad Promedio</div>
+                <div class="metric-value">{Cantidad_promedio}</div>
             </div>
             <div class="metric-box">
                 <div class="metric-title">Accesorios promedio</div>
@@ -150,9 +150,8 @@ if vista_general or not vista_filtrada:
 
         st.pyplot(fig) 
     with col4:
-        payment_counts = df['Payment Method'].value_counts()
-        plt.figure(figsize=(8, 6))
-        payment_counts.plot(kind='bar', color='skyblue', edgecolor='black')
+        fig,ax =plt.figure(figsize=(8, 6))
+        sns.countplot.plot(data=df,x='Payment Method', ax=ax, color='skyblue', edgecolor='black')
         plt.title("Distribución de Métodos de Pago", fontsize=14)
         plt.xlabel("Método de Pago", fontsize=12)
         plt.ylabel("Cantidad", fontsize=12)
